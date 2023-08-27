@@ -1,6 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { resetQuizStates } from "../redux/quizSlice";
 import { resetModalStates } from "../redux/modalSlice";
+import { resetCloseModalStates } from "../redux/closeModalSlice";
 
 const Result = () => {
   const { score, totalQuestions } = useSelector((state) => state.quiz);
@@ -12,6 +13,7 @@ const Result = () => {
     // window.location.reload();
     dispatch(resetModalStates())
     dispatch(resetQuizStates())
+    dispatch(resetCloseModalStates())
 };
 
   return (

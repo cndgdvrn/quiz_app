@@ -19,7 +19,7 @@ const StartQuiz = () => {
       <button
         onClick={()=>handleClick()}
         className="outline-none bg-purple-600 text-gray-700 p-4 font-semibold tracking-wider text-3xl rounded-xl hover:text-gray-950 hover:bg-purple-400 transition-all">
-        Quizi Başlat
+        Start Quiz
       </button>
     </div>
   );
