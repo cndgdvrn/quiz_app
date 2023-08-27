@@ -35,27 +35,29 @@ const Modal = () => {
   const dispatch = useDispatch();
 
   const [condition, setCondition] = useState(false);
-    // wholeQuestions[currentQuestion] && currentQuestion < totalQuestions;
+  // wholeQuestions[currentQuestion] && currentQuestion < totalQuestions;
 
+  //UseEffect comp render olur olmaz soruyu getirdiği için total soru sayısının 1 eksiği kadar ile sınırlandırıldı.
+  useEffect(() => {
+    if (
+      wholeQuestions[currentQuestion] &&
+      currentQuestion < totalQuestions - 1
+    ) {
+      console.log(currentQuestion, "currentQuestion");
+      setCondition(true);
+    } else {
+      setCondition(false);
+    }
+  }, [wholeQuestions, currentQuestion, totalQuestions]);
 
-    //UseEffect comp render olur olmaz soruyu getirdiği için total soru sayısının 1 eksiği kadar ile sınırlandırıldı.
-    useEffect(()=>{
-        if(wholeQuestions[currentQuestion] && currentQuestion < totalQuestions-1){
-            console.log(currentQuestion,"currentQuestion");
-            setCondition(true)
-        }else{
-            setCondition(false)
-        }
-    },[wholeQuestions,currentQuestion,totalQuestions])
-
-    console.log(condition,"condition");
+  console.log(condition, "condition");
 
   useEffect(() => {
     if (timerStatus === true && timer >= 0 && condition) {
       let interval = setInterval(() => {
         dispatch(updateTimer());
         setWidth(timer * (384 / 30000));
-      }, 1000);
+      }, 100);
 
       if (timer === 0) {
         handleNextQuestion();
@@ -101,7 +103,7 @@ const Modal = () => {
                 </div>
                 {closeModalStatus && (
                   <div className="fixed top-0 left-0 w-full h-full bg-gray-300 bg-opacity-20 flex justify-center items-center z-10">
-                    <CloseModal  setCondition={setCondition} />
+                    <CloseModal setCondition={setCondition} />
                   </div>
                 )}
               </div>
@@ -140,7 +142,7 @@ const Modal = () => {
               </button>
             </div>
           ) : (
-            <Result />
+            <Result setCondition={setCondition} />
           )}
         </div>
       )}

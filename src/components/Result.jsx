@@ -3,7 +3,7 @@ import { resetQuizStates } from "../redux/quizSlice";
 import { resetModalStates } from "../redux/modalSlice";
 import { resetCloseModalStates } from "../redux/closeModalSlice";
 
-const Result = () => {
+const Result = ({setCondition}) => {
   const { score, totalQuestions } = useSelector((state) => state.quiz);
   const dispatch = useDispatch();
 
@@ -14,6 +14,7 @@ const Result = () => {
     dispatch(resetModalStates())
     dispatch(resetQuizStates())
     dispatch(resetCloseModalStates())
+    setCondition(true)
 };
 
   return (

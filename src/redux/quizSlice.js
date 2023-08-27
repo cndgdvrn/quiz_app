@@ -7,7 +7,6 @@ const initialState = {
   currentQuestion: 0,
   score: 0,
   totalCorrect: 0,
-  condition:true,
   timer: 30000,
   timerStatus: false,
 };
@@ -29,10 +28,10 @@ export const quizSlice = createSlice({
     },
     calcScore: (state) => {
       state.score = state.totalCorrect * 10;
-      console.log(state.score,"score");
+      console.log(state.score, "score");
     },
     updateTimer: (state) => {
-      state.timer = state.timer - 1000; 
+      state.timer = state.timer - 100;
     },
     resetTimer: (state) => {
       state.timer = 30000;
@@ -40,21 +39,13 @@ export const quizSlice = createSlice({
     updateTimerStatus: (state) => {
       state.timerStatus = !state.timerStatus;
     },
-    resetQuizStates : (state) => {
+    resetQuizStates: (state) => {
       state.currentQuestion = 0;
       state.score = 0;
       state.totalCorrect = 0;
       state.timer = 30000;
       state.timerStatus = false;
     },
-    checkCondition: (state) => {
-      if(state.wholeQuestions[state.currentQuestion] && state.currentQuestion < state.totalQuestions){
-        state.condition = true;
-      }else{
-        state.condition = false;
-      }
-    }
-    
   },
 });
 
@@ -65,7 +56,6 @@ export const {
   updateTimer,
   resetTimer,
   updateTimerStatus,
-  checkCondition,
-  resetQuizStates
+  resetQuizStates,
 } = quizSlice.actions;
 export default quizSlice.reducer;
