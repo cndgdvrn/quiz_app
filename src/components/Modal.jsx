@@ -35,14 +35,9 @@ const Modal = () => {
   const dispatch = useDispatch();
 
   const [condition, setCondition] = useState(false);
-  // wholeQuestions[currentQuestion] && currentQuestion < totalQuestions;
 
-  //UseEffect comp render olur olmaz soruyu getirdiği için total soru sayısının 1 eksiği kadar ile sınırlandırıldı.
   useEffect(() => {
-    if (
-      wholeQuestions[currentQuestion] &&
-      currentQuestion < totalQuestions - 1
-    ) {
+    if (wholeQuestions[currentQuestion] && currentQuestion < totalQuestions) {
       console.log(currentQuestion, "currentQuestion");
       setCondition(true);
     } else {
@@ -51,13 +46,16 @@ const Modal = () => {
   }, [wholeQuestions, currentQuestion, totalQuestions]);
 
   console.log(condition, "condition");
+  console.log(wholeQuestions, "wholeQuestions");
+  console.log(currentQuestion, "currentQuestion");
+  console.log(totalQuestions, "totalQuestions");
 
   useEffect(() => {
     if (timerStatus === true && timer >= 0 && condition) {
       let interval = setInterval(() => {
         dispatch(updateTimer());
         setWidth(timer * (384 / 30000));
-      }, 100);
+      }, 1000);
 
       if (timer === 0) {
         handleNextQuestion();
@@ -84,6 +82,10 @@ const Modal = () => {
     dispatch(resetTimer());
     setWidth(0);
     setChoosenAnswer(999);
+
+    if (currentQuestion + 1 >= totalQuestions) {
+        setCondition(false);
+      }
   };
 
   return (

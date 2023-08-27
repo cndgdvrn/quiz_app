@@ -4,7 +4,7 @@ import { questions } from "../data/questions";
 const initialState = {
   wholeQuestions: questions,
   totalQuestions: questions.length,
-  currentQuestion: 0,
+  currentQuestion:0,
   score: 0,
   totalCorrect: 0,
   timer: 30000,
@@ -31,7 +31,7 @@ export const quizSlice = createSlice({
       console.log(state.score, "score");
     },
     updateTimer: (state) => {
-      state.timer = state.timer - 100;
+      state.timer = state.timer - 1000;
     },
     resetTimer: (state) => {
       state.timer = 30000;
